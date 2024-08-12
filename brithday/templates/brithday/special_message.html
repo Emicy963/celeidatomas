@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem Especial</title>
+    <link rel="stylesheet" href="{% static 'brithday/css/styles-css.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .special-message {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .special-message h1 {
+            color: var(--text-color);
+        }
+        .special-message p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+        .images-container {
+            display: flex;
+            overflow: hidden;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px auto;
+        }
+        .images-container img {
+            max-width: 100%;
+            height: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            margin: 10px;
+        }
+        .images-container img.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .final-message {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .final-message h2 {
+            color: var(--text-color);
+        }
+        .final-message p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="special-message">
+        <h1>Parabéns, Celeida Rebeca Luneva Tomás!</h1>
+        <p>Você alcançou uma pontuação incrível no jogo! Assim como você coletou 19 presentes, quero dejesar que seu 19º aniversário seja repleto de alegrias, conquistas e momentos especiais. Que este novo ano de vida seja tão brilhante e cheio de sucesso quanto sua performance no jogo!</p>
+    </div>
+
+    <div class="images-container">
+        <img src="{% static 'brithday/img/tomas1.jpg' %}" alt="Imagem 1">
+        <div class="special-message">
+            <p>Muito obrigado, pelos momentos alegres que me propocionaste!</p>
+        </div>
+        <img src="{% static 'brithday/img/tomas2.jpg' %}" alt="Imagem 2">
+        <div class="special-message">
+            <p>Com certeza absoluta, tu foste a melhor pessoa já conheci!</p>
+        </div>
+    </div>
+
+    <div class="final-message">
+        <h2>Você é incrível!</h2>
+        <p>Provavelmente já ouviste todo tipo de elogios hoje e você sabe que eu odeio ser cliche, então vou tentar garantir que diga tudo o que tenho para te dizer do meu jeito!.</p>
+    </div>
+    <div class="final-message">
+        <h2>Pior Felicitação de Sempre!</h2>
+        <p>Não queria apenas falar contigo hoje, mas eu sei que é importante para ti e se é importante para ti, também é para mim. Vou começar por ti disser, que deste a gente deixou de se falar, não passa nenhum dia, nenhum dia mesmo que eu não pense em ti e como tu és especial para mim, por acaso voltei a sonhar, mas todos são horríveis.</p>
+        <p>Uma vez a minha mãe disse para mim "As pessoas só estarão contigo por interesse alguma coisa, depois de conseguiram, vão te descartar!" e felizmente ela esteva certa bem, não completamenta porque tem pessoas que vale a pena correr o risco, porque de certa forma todos nós somos assim e não é algo necessiariamente ruim!</p>
+        <p>Eu sei que esse não é o caso contigo (espero que não kkkk), e na real nem se fosse eu nunca me arrependeria de te ter conhecido. Sinceramente tu és uma das únicas pessoas que não liga o meu modo foda-se, muito pelo contrário, se fosse para escoher pessoas perfeitas, acredita que serías uma das poucas pessoas que escolheria.</p>
+        <p>Não por não teres defeitos, mas porque o que uma outra pessoa pode chamar defeito, eu adoraria em ti, ou seja, eu literalmente gosto de tudo em ti e eu não sou pessoa de dizer coisas por impulso e sem pensar primeiro, eu já pensei sobre isso, acho que centenas de vezes e cheguei a essa conclução.</p>
+        <p>Esses dias não tenho saído muito, consequentemente tenho pensado muito, mais que o normal (a maioria não são boas coisas) mas também quase sempre penso em ti e eu gosto de pensar em ti, porque tu me trazes um sentimento de paz e de conforto, as vezes quando estou a treinar o cubo crio uma especie de conversa imaginária contigo para me ajudar a focar e a me manter acordado!</p>
+        <p>Antes de agradecer preciso te pedir desculpas por tudo de ruim que já te fiz sentir, acredita que não era a minha intenção, desculpas por não te amar o suficiente para dizer a tua frente, desculpa por ser fraco, desculpa por ser um medrícas, desculpa por não exergar mais brilho na vida...</p>
+        <p>Sinceramente, a minha mente está literalmente uma merda, mas muito obrigado por me ajudares a me manter acordado, obrigado por seres a melhor amiga que já tive na vida, obrigado por me ouvires mesmo quando não querias, obrigado por aturar as minhas confuções, obrigado por tudo e mais alguma coisa que esqueci de meter aqui, mas acima de tudo obrigado por seres o ser vivo (não da minha família) que eu mais amei, simplesmente obrigado por existires.</p>
+        <p>Tem muita coisa que eu queria te falar, mas estou cansado de nunca te dizer as coisas cara a cara, talvez um dia te diga tudo que tenho aqui na minha cabeça, guardadas só para ti!</p>
+        <p>OBS: Comecei esse projeto as 02:46AM-07/08, são agora 05:33AM-12/08, então espero que chores. kkk</p>
+    </div>
+    
+    <script>
+        // Criação do botão de modo noturno
+        const toggleModeBtn = document.createElement('button');
+        toggleModeBtn.textContent = 'Dia/Noite';
+        toggleModeBtn.style.position = 'fixed';
+        toggleModeBtn.style.top = '10px';
+        toggleModeBtn.style.right = '10px';
+        document.body.appendChild(toggleModeBtn);
+
+        // Função para atualizar o estado do botão com base na preferência salva
+        function updateMode() {
+            const darkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                toggleModeBtn.textContent = 'Modo Claro'; // Altera o texto do botão
+            } else {
+                document.body.classList.remove('dark-mode');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Altera o texto do botão
+            }
+        }
+
+        // Chama a função para definir o modo inicial
+        updateMode();
+
+        // Adiciona o evento de clique para alternar o modo
+        toggleModeBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Atualiza o texto
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+                toggleModeBtn.textContent = 'Modo Claro'; // Atualiza o texto
+            }
+        });
+        document.addEventListener('scroll', function() {
+            const images = document.querySelectorAll('.images-container img');
+            images.forEach(img => {
+                const imgTop = img.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (imgTop < windowHeight - 100) {
+                    img.classList.add('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

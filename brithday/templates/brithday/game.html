@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-jogo: Pegue os Presentes!</title>
+    <link rel="stylesheet" href="{% static 'brithday/css/styles-css.css' %}">
+    <style>
+        /* Estilos gerais */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Estilos para modo noturno */
+        body.dark-mode {
+            background-color: #2f2f2f;
+            color: #b9b3b3;
+        }
+
+        .game-container {
+            background-color: var(--secondary-color);
+            box-shadow: 
+                12px 12px 24px var(--dark-shadow)),
+                -12px -12px 24px (--light-shadow;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark-mode .game-container {
+            background-color: var(--bg-color);
+            box-shadow: 
+                12px 12px 24px rgba(139, 69, 19, 0.5),
+                -12px -12px 24px rgba(160, 155, 155, 0.6);
+        }
+
+        button {
+            background-color: var(--bg-color);
+            color: #8b4513;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode button {
+            background-color: #4e4e4e;
+            color: #dcdcdc;
+        }
+
+        button:hover {
+            background-color: #deb887;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #6c6c6c;
+        }
+
+        #gameCanvas {
+            background-color: #deb887;
+        }
+
+        body.dark-mode #gameCanvas {
+            background-color: #5a5a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Mini-jogo: Pegue os Presentes!</h1>
+        
+        <canvas id="gameCanvas" width="400" height="200"></canvas>
+        <p>Pontuação: <span id="score">0</span></p>
+        <button id="startGame">Iniciar Jogo</button>
+        <br><br>
+        <a href="{% url 'birthday_page' %}" class="btn">Voltar para a página de aniversário</a>
+    </div>
+
+    <script src="{% static 'brithday/js/game-js.js' %}"></script>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startGameBtn = document.getElementById('startGame');
+        const scoreElement = document.getElementById('score');
+
+        let gameInterval;
+        let score = 0;
+        let player = { x: canvas.width / 2, y: canvas.height - 30, width: 50, height: 30 };
+        let gifts = [];
+
+        function drawPlayer() {
+            ctx.fillStyle = '#8b7355';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawGift(gift) {
+            ctx.fillStyle = '#ff69b4';
+            ctx.fillRect(gift.x, gift.y, gift.width, gift.height);
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawPlayer();
+            
+            gifts.forEach((gift, index) => {
+                gift.y += 2;
+                drawGift(gift);
+                
+                if (gift.y + gift.height > player.y && gift.x < player.x + player.width && gift.x + gift.width > player.x) {
+                    gifts.splice(index, 1);
+                    score++;
+                    scoreElement.textContent = score;
+                    
+                    if (score === 19) {
+                        clearInterval(gameInterval);
+                        window.open('/special-message/', '_blank');
+                    }
+                }
+                
+                if (gift.y > canvas.height) {
+                    clearInterval(gameInterval);
+                    alert('Você deixou cair um presente! O jogo vai reiniciar.');
+                    startGame();
+                }
+            });
+            
+            if (Math.random() < 0.02) {
+                gifts.push({
+                    x: Math.random() * (canvas.width - 20),
+                    y: 0,
+                    width: 20,
+                    height: 20
+                });
+            }
+        }
+
+        function startGame() {
+            score = 0;
+            scoreElement.textContent = score;
+            gifts = [];
+            if (gameInterval) {
+                clearInterval(gameInterval);
+            }
+            gameInterval = setInterval(updateGame, 20);
+            startGameBtn.textContent = 'Reiniciar Jogo';
+        }
+
+        const toggleModeBtn = document.createElement('button');
+        toggleModeBtn.textContent = 'Modo Escuro';
+        toggleModeBtn.style.position = 'fixed';
+        toggleModeBtn.style.top = '10px';
+        toggleModeBtn.style.right = '10px';
+        document.body.appendChild(toggleModeBtn);
+
+        function updateMode() {
+            const darkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                toggleModeBtn.textContent = 'Modo Claro';
+            } else {
+                document.body.classList.remove('dark-mode');
+                toggleModeBtn.textContent = 'Modo Escuro';
+            }
+        }
+
+        updateMode();
+
+        toggleModeBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+                toggleModeBtn.textContent = 'Modo Escuro';
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+                toggleModeBtn.textContent = 'Modo Claro';
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            player.x = e.clientX - rect.left - player.width / 2;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            player.x = touch.clientX - rect.left - player.width / 2;
+        });
+
+        startGameBtn.addEventListener('click', startGame);
+
+        function resizeCanvas() {
+            canvas.width = Math.min(400, window.innerWidth - 40);
+            canvas.height = 200;
+            player.y = canvas.height - 30;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+</body>
+</html>

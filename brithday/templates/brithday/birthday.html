@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário!</title>
+    <link rel="stylesheet" href="{% static 'brithday/css/styles-css.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Feliz Aniversário, <span id="nome">{{ nomeDaAmiga }}</span>!</h1>
+        
+        <div id="slideshow">
+            {% for imagem in imagens %}
+                <img src="{% static imagem %}" alt="Foto {{ forloop.counter }}" {% if forloop.first %}class="active"{% endif %}>
+            {% endfor %}
+        </div>
+        
+        <p id="mensagem">Clique no botão para ver uma mensagem especial!</p>
+        <button id="botaoMensagem">Ver Mensagem</button>
+        
+        <div id="countdown"></div>
+        
+        <a href="{% url 'game_page' %}" class="btn">Jogar o Mini-jogo de Aniversário!</a>
+
+    </div>
+
+    <script src="{% static 'brithday/js/game-js.js' %}"></script>
+    <script>
+        // Nome da aniversariante
+        const nomeDaAmiga = 'Tomás Pequena';
+        document.getElementById('nome').textContent = nomeDaAmiga;
+
+        // Modo Noturno
+        // Criação do botão de modo noturno
+        const toggleModeBtn = document.createElement('button');
+        toggleModeBtn.textContent = 'Dia/Noite';
+        toggleModeBtn.style.position = 'fixed';
+        toggleModeBtn.style.top = '10px';
+        toggleModeBtn.style.right = '10px';
+        document.body.appendChild(toggleModeBtn);
+
+        // Função para atualizar o estado do botão com base na preferência salva
+        function updateMode() {
+            const darkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                toggleModeBtn.textContent = 'Modo Claro'; // Altera o texto do botão
+            } else {
+                document.body.classList.remove('dark-mode');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Altera o texto do botão
+            }
+        }
+
+        // Chama a função para definir o modo inicial
+        updateMode();
+
+        // Adiciona o evento de clique para alternar o modo
+        toggleModeBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Atualiza o texto
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+                toggleModeBtn.textContent = 'Modo Claro'; // Atualiza o texto
+            }
+        });
+
+        // Mensagens de parabéns
+        const mensagens = [
+            "Esse é o meu presente para ti, Tomás Pequena!",
+            "Podia estar melhor, mas tenho um pessímo sentido de estética kkk.",
+            "Não é o melhor de todos, mas obviamente é o mais diferente.",
+            "Também não tem como, estámos a falar de mim kkkk."
+        ];
+
+        let indice = 0;
+        const botao = document.getElementById('botaoMensagem');
+        const mensagemElement = document.getElementById('mensagem');
+
+        botao.addEventListener('click', () => {
+            mensagemElement.textContent = mensagens[indice];
+            indice = (indice + 1) % mensagens.length;
+        });
+
+        // Slideshow
+        const slideshow = document.getElementById('slideshow');
+        const slides = slideshow.getElementsByTagName('img');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3100);
+
+        
+    </script>
+</body>
+</html>

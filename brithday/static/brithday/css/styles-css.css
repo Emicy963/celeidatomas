@@ -1,0 +1,246 @@
+:root {
+    --bg-color: #f5f5dc;
+    --text-color: #4b2e25;
+    --primary-color: #8b4513;
+    --secondary-color: #deb887;
+    --accent-color: #a0522d;
+    --shadow-color: rgba(139, 69, 19, 0.2);
+    --light-shadow: rgba(160, 155, 155, 0.7); 
+    --dark-shadow: rgba(139, 69, 19, 0.3);
+}
+
+body.dark-mode {
+    --bg-color: #2f2f2f;
+    --text-color: #b9b3b3;
+    --primary-color: #8b4513;
+    --secondary-color: #6b4226;
+    --accent-color: #a0522d;
+    --shadow-color: rgba(160, 82, 45, 0.2);
+    --light-shadow: rgba(60, 40, 30, 0.7);
+    --dark-shadow: rgba(20, 10, 5, 0.3);
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Garantir que os elementos estejam em coluna */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+}
+
+.container, .game-container, .login-container, .special-message, .final-message {
+    background-color: var(--secondary-color);
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 
+        12px 12px 24px var(--dark-shadow),
+        -12px -12px 24px var(--light-shadow);
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaço entre os elementos */
+}
+
+.container:hover, .game-container:hover, .login-container:hover, .special-message:hover {
+    box-shadow: 
+        8px 8px 16px var(--dark-shadow),
+        -8px -8px 16px var(--light-shadow);
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+button, .btn, .login-button {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    margin: 10px auto;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+button:hover, .btn:hover, .login-button:hover {
+    box-shadow: 
+        inset 4px 4px 8px var(--dark-shadow),
+        inset -4px -4px 8px var(--light-shadow);
+    color: var(--accent-color);
+}
+
+#slideshow {
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 
+        8px 8px 16px var(--dark-shadow),
+        -8px -8px 16px var(--light-shadow);
+}
+
+#slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#slideshow img.active {
+    opacity: 1;
+}
+
+#countdown, #mensagem {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: var(--accent-color);
+    font-weight: 500;
+    text-align: center;
+}
+
+textarea, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px;
+    resize: vertical;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset 4px 4px 8px var(--dark-shadow),
+        inset -4px -4px 8px var(--light-shadow);
+}
+
+textarea:focus, input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    box-shadow: 
+        inset 6px 6px 12px var(--dark-shadow),
+        inset -6px -6px 12px var(--light-shadow);
+}
+
+#messages {
+    text-align: left;
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    box-shadow: 
+        inset 4px 4px 8px var(--dark-shadow),
+        inset -4px -4px 8px var(--light-shadow);
+}
+
+#gameCanvas {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    max-width: 100%;
+    height: auto;
+    box-shadow: 
+        8px 8px 16px var(--dark-shadow),
+        -8px -8px 16px var(--light-shadow);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.error-message {
+    color: #ff4444;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.special-message p, .final-message p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    box-shadow: 
+        inset 4px 4px 8px var(--dark-shadow),
+        inset -4px -4px 8px var(--light-shadow);
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container, .game-container, .login-container, .special-message, .final-message {
+        padding: 1.5rem;
+    }
+
+    h1, h2 {
+        font-size: 2rem;
+    }
+
+    #slideshow {
+        height: 200px;
+    }
+
+    button, .btn, .login-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    #countdown, #mensagem {
+        font-size: 1rem;
+    }
+}
+
+#toggleMode {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 
+        4px 4px 8px var(--dark-shadow),
+        -4px -4px 8px var(--light-shadow);
+    transition: all 0.3s ease;
+}
+
+#toggleMode:hover {
+    box-shadow: 
+        inset 2px 2px 4px var(--dark-shadow),
+        inset -2px -2px 4px var(--light-shadow);
+}

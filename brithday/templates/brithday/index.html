@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login para Página de Aniversário</title>
+    <link rel="stylesheet" href="{% static 'brithday/css/styles-css.css' %}">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .login-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-button:hover {
+            opacity: 0.9;
+        }
+        .error-message {
+            color: #ff4444;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login para Página de Aniversário</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" required>
+            </div>
+            <button type="submit" class="login-button">Entrar</button>
+        </form>
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Adicione o toggle de modo noturno, se desejar
+        // Criação do botão de modo noturno
+        const toggleModeBtn = document.createElement('button');
+        toggleModeBtn.textContent = 'Dia/Noite';
+        toggleModeBtn.style.position = 'fixed';
+        toggleModeBtn.style.top = '10px';
+        toggleModeBtn.style.right = '10px';
+        document.body.appendChild(toggleModeBtn);
+
+        // Função para atualizar o estado do botão com base na preferência salva
+        function updateMode() {
+            const darkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                toggleModeBtn.textContent = 'Modo Claro'; // Altera o texto do botão
+            } else {
+                document.body.classList.remove('dark-mode');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Altera o texto do botão
+            }
+        }
+
+        // Chama a função para definir o modo inicial
+        updateMode();
+
+        // Adiciona o evento de clique para alternar o modo
+        toggleModeBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+                toggleModeBtn.textContent = 'Modo Escuro'; // Atualiza o texto
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+                toggleModeBtn.textContent = 'Modo Claro'; // Atualiza o texto
+            }
+        });
+    </script>
+</body>
+</html>
